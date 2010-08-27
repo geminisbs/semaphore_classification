@@ -13,7 +13,7 @@ module Semaphore
     
     @@default_options = { :title => "", :alternate_body => "", :debug => false, :clustering_type => CLUSTERING_TYPES[:rms_scored_only], :clustering_threshold => 48,
                           :threshold => 48, :language => LANGUAGES[:english_marathon_stemmer], :generated_keys => true, :min_avg_article_page_size => 1.0, 
-                          :character_cutoff => 500000, :document_score_limit => 0, :article_mode => :multi
+                          :character_cutoff => 500000, :document_score_limit => 0, :article_mode => :single
                           }
     @@connection = nil
 

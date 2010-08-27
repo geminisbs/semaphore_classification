@@ -46,7 +46,7 @@ This will be used to classify on if the document fails to be retrieved by the CS
 
 :multi will attempt to split the document into "articles" so that the rules only consider evidence within an article and then clustering is applied to calculate which categories are representative for the document as a whole rather than simply for an article.
 
-*Default* :multi
+*Default* :single
 
 === :debug (optional)
 
