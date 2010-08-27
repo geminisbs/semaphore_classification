@@ -22,83 +22,83 @@ The document type will be automatically identified by the CS.
 
 ==== :title (optional)
 
-*Value:* String
+*Value* String
   
 The title in the request is used mainly for classification of documents held by a content management system.
 
-*Default:* none
+*Default* none
 
 ==== :alternate_body (optional)
 
-*Value:* String
+*Value* String
 
 This will be used to classify on if the document fails to be retrieved by the CS for some reason.
 
-*Default:* none
+*Default* none
 
 ==== :article_mode (optional)
 
-*Value:* :single or :multi
+*Value* :single or :multi
 
 :single will process the document in 1 large chunk.  This will mean that evidence from all parts of the document are considered at the same time.  Depending on the design of the rulenet this may increase the chance of mis-classifications.  Singlearticle may also require large amounts of memory (or if this is restricted, large amounts of time) due to the size of evidence tables which have to be evaluated.
 
 :multi will attempt to split the document into "articles" so that the rules only consider evidence within an article and then clustering is applied to calculate which categories are representative for the document as a whole rather than simply for an article.
 
-*Default:* :multi
+*Default* :multi
 
 ==== :debug (optional)
 
-*Value:* true or false
+*Value* true or false
 
 Will return the article(s) as well as rule matches in the response. Useful for troubleshooting, but results in large responses.
 
-*Default:* false
+*Default* false
 
 ==== :clustering_type (optional)
 
-*Value:* [:all, :average, :average_scored_only, :common_scored_only, :common, :rms_scored_only, :rms, :none]
+*Value* [:all, :average, :average_scored_only, :common_scored_only, :common, :rms_scored_only, :rms, :none]
 
 Clustering type specifies the type of calculation to use in deriving the document level scores from the article scores. This only applies to multiarticle style classifications.
 
-*Default:* :rms_scored_only
+*Default* :rms_scored_only
 
 ==== :clustering_threshold (optional)
 
-*Value:* [0-100]
+*Value* [0-100]
 
 The clustering threshold is only used in multiarticle mode. When the clustering algorithm is selected, the result is checked against this threshold and a score is only promoted to document level if it is >= this value.
 
-*Default:* 48
+*Default* 48
 
 ==== :threshold (optional)
 
-*Value:* [0-100]
+*Value* [0-100]
 
 The threshold is used to decide at what level of significance a category rule will fire. 
 
 The score (or significance if you prefer) varies between 0 and 100 sometimes this is displayed as 0.00 - 1.00 depending on whether it is used for integer calculations (0-100) or for statistical floating point operations (0.00 - 1.00 ie a normalised value is generally better here).
 
-*Default:* 48
+*Default* 48
 
 ==== :language (optional)
 
-*Value:* [:english, :english_marathon_stemmer, :english_morphological_stemmer, :english_morph_and_derivational_stemmer, :french, :italian, :german, :spanish, :dutch, :portuguese, :danish, :norwegian, :swedish, :arabic]
+*Value* [:english, :english_marathon_stemmer, :english_morphological_stemmer, :english_morph_and_derivational_stemmer, :french, :italian, :german, :spanish, :dutch, :portuguese, :danish, :norwegian, :swedish, :arabic]
 
-Note: for Standard Language processing only English has multiple stemmers available - The other languages supported only have Marathon stemmer available.
+_Note_ for Standard Language processing only English has multiple stemmers available - The other languages supported only have Marathon stemmer available.
 
-*Default:* :english_marathon_stemmer
+*Default* :english_marathon_stemmer
 
 ==== :generated_keys (optional)
 
-*Value:* true or false
+*Value* true or false
 
 Using generated keys will mean that all rules will have a unique key (which is simply the index of the rule in the rulenet). 
 
-*Default:* true
+*Default* true
 
 ==== :min_avg_article_page_size (optional)
 
-*Value:* Decimal
+*Value* Decimal
 
 The minimum average article page size is only relevant in multi article mode
 
@@ -106,11 +106,11 @@ For documents which contain page information (ie not html and other continuous f
 
 The idea is that this gives an easy to use approximate measure for checking splitting - ie a min average article page size of 1 means that on average we want 1 article to be bigger than a single page so if a document of 10 pages splits into 20 articles then we probably have a bad statistical split so classifying as a single article will give better results
 
-*Default:* 1.0
+*Default* 1.0
 
 ==== :character_cutoff (optional)
 
-*Values:* FixNum
+*Values* FixNum
 
 The character count cutoff is a mechanism for avoiding errors or lengthy classification times on large documents. 
 
@@ -126,11 +126,11 @@ Other multi document type parsing systems (for example the simple parser include
 
 Generally this value is set high enough that any reasonable document (ie one produced by a person) will be fully considered so a value of 1/2 a million is realistic - automatically generated text files which cause lengthy classification times often have more than this characters but the information is very rarely of any use to an end user.
 
-*Default:* 500000
+*Default* 500000
 
 ==== :document_score_limit (optional)
 
-*Value:* FixNum
+*Value* FixNum
 
 The document level score limit is a mechanism for restricting the document level classifications to the top-N results only.
 
@@ -140,12 +140,12 @@ However some systems have rather strict limits on the number of "tags" or "meta 
 
 Currently the implementation is pretty simplistic (will return N or less scores sorted by the confidence) so could easily be implemented in the integration layer but it is possible that further work could go here so that CS could check particular categories or classes of categories in a specific rulenet defined manner so that "important" classes of categorisations (though with a low confidence) are not excluded by large numbers of higher confidence classifications in some less important class of rules.
 
-*Default:* 0
+*Default* 0
 
 == Dependencies
 
-* {nokogiri}[http://github.com/tenderlove/nokogiri] (HTML, XML, SAX and Reader parser)
-* {curb}[http://github.com/taf2/curb] (Ruby wrapper around the great {libcurl}[http://curl.haxx.se/])
+* {nokogiri}[http://github.com/tenderlove/nokogiri]
+* {rest-client}[http://github.com/archiloque/rest-client]
 
 == Copyright
 
