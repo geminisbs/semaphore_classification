@@ -12,15 +12,15 @@ To classify documents:
 
   Semaphore::Client.classify(<uri_to_document>, [options])
 
-=== Semaphore::Client.classify() Options
+== Semaphore::Client.classify() Options
 
-==== :document_uri (required)
+=== :document_uri (required)
 
 This may use the following protocols (FTP, FTPS, HTTP, HTTPS). For example: http://mybucket.s3.amazonaws.com/some_file.pdf
 Supported document types include: Microsoft Office files, Lotus files, OpenOffice files, PDFs, WordPerfect docs, HTML docs and most other common file formats.
 The document type will be automatically identified by the CS.
 
-==== :title (optional)
+=== :title (optional)
 
 *Value* String
   
@@ -28,7 +28,7 @@ The title in the request is used mainly for classification of documents held by 
 
 *Default* none
 
-==== :alternate_body (optional)
+=== :alternate_body (optional)
 
 *Value* String
 
@@ -36,7 +36,7 @@ This will be used to classify on if the document fails to be retrieved by the CS
 
 *Default* none
 
-==== :article_mode (optional)
+=== :article_mode (optional)
 
 *Value* :single or :multi
 
@@ -46,7 +46,7 @@ This will be used to classify on if the document fails to be retrieved by the CS
 
 *Default* :multi
 
-==== :debug (optional)
+=== :debug (optional)
 
 *Value* true or false
 
@@ -54,7 +54,7 @@ Will return the article(s) as well as rule matches in the response. Useful for t
 
 *Default* false
 
-==== :clustering_type (optional)
+=== :clustering_type (optional)
 
 *Value* [:all, :average, :average_scored_only, :common_scored_only, :common, :rms_scored_only, :rms, :none]
 
@@ -62,7 +62,7 @@ Clustering type specifies the type of calculation to use in deriving the documen
 
 *Default* :rms_scored_only
 
-==== :clustering_threshold (optional)
+=== :clustering_threshold (optional)
 
 *Value* [0-100]
 
@@ -70,7 +70,7 @@ The clustering threshold is only used in multiarticle mode. When the clustering 
 
 *Default* 48
 
-==== :threshold (optional)
+=== :threshold (optional)
 
 *Value* [0-100]
 
@@ -80,7 +80,7 @@ The score (or significance if you prefer) varies between 0 and 100 sometimes thi
 
 *Default* 48
 
-==== :language (optional)
+=== :language (optional)
 
 *Value* [:english, :english_marathon_stemmer, :english_morphological_stemmer, :english_morph_and_derivational_stemmer, :french, :italian, :german, :spanish, :dutch, :portuguese, :danish, :norwegian, :swedish, :arabic]
 
@@ -88,7 +88,7 @@ _Note_ for Standard Language processing only English has multiple stemmers avail
 
 *Default* :english_marathon_stemmer
 
-==== :generated_keys (optional)
+=== :generated_keys (optional)
 
 *Value* true or false
 
@@ -96,7 +96,7 @@ Using generated keys will mean that all rules will have a unique key (which is s
 
 *Default* true
 
-==== :min_avg_article_page_size (optional)
+=== :min_avg_article_page_size (optional)
 
 *Value* Decimal
 
@@ -108,7 +108,7 @@ The idea is that this gives an easy to use approximate measure for checking spli
 
 *Default* 1.0
 
-==== :character_cutoff (optional)
+=== :character_cutoff (optional)
 
 *Values* FixNum
 
@@ -128,7 +128,7 @@ Generally this value is set high enough that any reasonable document (ie one pro
 
 *Default* 500000
 
-==== :document_score_limit (optional)
+=== :document_score_limit (optional)
 
 *Value* FixNum
 
