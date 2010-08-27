@@ -10,11 +10,13 @@ Before you can classify documents, you must set the path to your CS:
   
 To classify documents:
 
-  Semaphore::Client.classify(<uri_to_document>, [options])
+  Semaphore::Client.classify([options])
+  
+Mostly likely you will specify a :document_uri when classifying documents, but if you do not you will need to specify an :alternate_body
 
 == Semaphore::Client.classify() Options
 
-=== :document_uri (required)
+=== :document_uri (optional)
 
 This may use the following protocols (FTP, FTPS, HTTP, HTTPS). For example: http://mybucket.s3.amazonaws.com/some_file.pdf
 Supported document types include: Microsoft Office files, Lotus files, OpenOffice files, PDFs, WordPerfect docs, HTML docs and most other common file formats.

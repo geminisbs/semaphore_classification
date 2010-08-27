@@ -23,9 +23,9 @@ module Semaphore
         @@connection = Connection.new(realm, proxy)
       end
 
-      def classify(document_uri, *args)
+      def classify(*args)
         options = extract_options!(args)
-        options[:document_uri] = document_uri
+        raise InsufficientArgs if options[:alternate_body].empty? && options[:document_uri].empty?
         
         result = post @@default_options.merge(options)
       end
