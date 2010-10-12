@@ -3,9 +3,11 @@ module Semaphore
   class Connection
 
     attr_reader :realm
+    attr_accessor :decode_term_ids
 
     def initialize(realm, proxy=nil)
       @realm = realm
+      @decode_term_ids = nil
       @proxy = proxy
     end
 
@@ -68,7 +70,11 @@ module Semaphore
         begin
           doc = Nokogiri::XML.parse(response)
           doc.xpath('//META').each do |node|
-            data << { :term => node['value'], :key => node['key'], :score => node['score'] } if node['name'] == "Generic"
+            if node['name'] == "Generic_ID"
+              term = { :term_id => node['value'].to_i, :score => node['score'].to_f }
+              term[:term] = Client.decode_term_id(term[:term_id]) if @decode_term_ids
+              data << term
+            end
           end
         rescue
           raise DecodeError, "content: <#{response.body}>"

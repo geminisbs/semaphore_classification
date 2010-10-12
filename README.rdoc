@@ -14,6 +14,20 @@ To classify documents:
   
 Mostly likely you will specify a :document_uri when classifying documents, but if you do not you will need to specify an :alternate_body
 
+Note that the classify method will only return the term IDs that matched and not
+the term itself. In order to set it to return the terms as well, you can use the
+option:
+  
+  Semaphore::Client.decode_term_ids = true
+  
+This will slow down your classifications, however, as a new HTTP request is made
+for each term in the response.
+
+== Semaphore::Client.decode_term_id(<term_id>) Options
+
+This method is used when you have the ID of a term and would like to retrieve 
+its name from the Search Enhancement Server.
+
 == Semaphore::Client.classify() Options
 
 === :document_uri (optional)
