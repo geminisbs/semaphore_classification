@@ -14,6 +14,7 @@ module Semaphore
   class NotFound < SemaphoreError; end
   class ServerError < SemaphoreError; end
   class Unavailable < SemaphoreError; end
+  class Timeout < SemaphoreError; end
   class DecodeError < SemaphoreError; end
   class RealmNotSpecified < SemaphoreError; end
 end

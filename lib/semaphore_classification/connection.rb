@@ -18,16 +18,16 @@ module Semaphore
   private
 
     def request(method, data)
-      response = send_request method, construct_document(data)
+      response = send_request(method, construct_document(data))
 
-      deconstruct_document(response)
+      deconstruct_document response
     end
 
     def send_request(method, data)
       RestClient.proxy = @proxy unless @proxy.nil?
       
       begin
-        response = RestClient.post @realm, :XML_INPUT => data, :multipart => true
+        response = RestClient.post(@realm, :XML_INPUT => data, :multipart => true)
       rescue => e
         raise_errors(e.response)
       end
@@ -65,6 +65,7 @@ module Semaphore
     
     def deconstruct_document(response)
       data = Array.new
+      raise(Timeout, "The Semaphore server could not be reached") if response.nil?
       
       if !response.body.empty?
         begin
@@ -85,6 +86,8 @@ module Semaphore
     end
 
     def raise_errors(response)
+      raise(Timeout, "The Semaphore server could not be reached") if response.nil?
+      
       case response.code
         when 500
           raise ServerError, "Semaphore Classification Server had an internal error. #{response.description}\n\n#{response.body}"
